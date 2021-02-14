@@ -10,9 +10,9 @@ enum class State { LOADING, LOADED, ERROR }
 
 class AppsListViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val moviesRepository = AppsRepository(application)
+    private val appsRepository = AppsRepository(application)
 
-    // Movies
+
     private val appsList: MutableLiveData<List<AppModel>> by lazy {
         MutableLiveData<List<AppModel>>().also {
             state.postValue(State.LOADING)
@@ -35,7 +35,7 @@ class AppsListViewModel(application: Application) : AndroidViewModel(application
 
 
     private fun loadAppsList() {
-        moviesRepository.getAppsList().observeForever {
+        appsRepository.getAppsList().observeForever {
             if (it == null) {
                 state.postValue(State.ERROR)
                 return@observeForever

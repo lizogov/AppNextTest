@@ -9,7 +9,10 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import kotlinx.android.synthetic.main.activity_applications.*
+import java.util.concurrent.TimeUnit
 
 
 class AppsListActivity : AppCompatActivity(), OnAppClickListener {
@@ -26,12 +29,22 @@ class AppsListActivity : AppCompatActivity(), OnAppClickListener {
         observeState()
         observeApps()
         observerOpenDetails()
+        startWorkManager()
+
+
     }
 
-    private fun initRecyclerView() {
-        appsList.layoutManager = GridLayoutManager(this,3)
+    private fun startWorkManager() {
+        val updateWorkRequest = PeriodicWorkRequestBuilder<UpdateWorker>(12, TimeUnit.HOURS)
+            .addTag("UPDATE").build()
+        WorkManager.getInstance(applicationContext).enqueue(
+            updateWorkRequest
+        )
+    }
 
-        // Create Movies Adapter
+
+    private fun initRecyclerView() {
+        appsList.layoutManager = GridLayoutManager(this, 3)
         appsAdapter = AppsViewAdapter(this, this)
 
         // Attach Adapter to RecyclerView

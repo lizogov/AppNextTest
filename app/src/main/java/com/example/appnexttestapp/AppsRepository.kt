@@ -59,10 +59,4 @@ class AppsRepository(private val appContext: Context) {
         }
     }
 
-    fun clearMoviesFromDb() {
-        logD("clearMoviesFromDb")
-        AppExecutors.diskIO.execute {
-            AppDatabase.getInstance(appContext)?.appDao()?.deleteAll()
-        }
-    }
 }

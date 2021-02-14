@@ -25,8 +25,8 @@ class AppsViewAdapter(
     }
 
     override fun onBindViewHolder(holder: AppViewHolder, position: Int) {
-        val movieModel = asyncListDiffer.currentList[position]
-        holder.bind(movieModel)
+        val appModel = asyncListDiffer.currentList[position]
+        holder.bind(appModel)
     }
 
     fun setData(newItems: List<AppModel>) {

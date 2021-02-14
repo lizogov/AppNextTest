@@ -20,7 +20,7 @@ class DetailsFragment : Fragment() {
 
     companion object {
 
-        private val ARG_APP = "MovieModel-data"
+        private val ARG_APP = "AppsModel-data"
 
         fun newInstance(appModel: AppModel): DetailsFragment {
             val fragment = DetailsFragment()
@@ -35,7 +35,7 @@ class DetailsFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         appModel = arguments?.getParcelable(ARG_APP)
-        logD("movieModel: " + appModel!!)
+        logD("appsModel: " + appModel!!)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
